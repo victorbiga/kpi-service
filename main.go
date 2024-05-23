@@ -52,8 +52,6 @@ func main() {
 
 	// Readiness probe
 	http.HandleFunc("/readyz", func(w http.ResponseWriter, r *http.Request) {
-		// Check if the application is ready to serve traffic
-		// Implement your readiness checks here
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("ready"))
 	})
