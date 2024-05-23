@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"log"
 )
 
 // Create a custom registry
@@ -37,7 +37,9 @@ func init() {
 
 func main() {
 	// Handle POST requests to update metrics
-	http.HandleFunc("/update", updateMetric)
+	http.HandleFunc("/update", func(w http.ResponseWriter, r *http.Request) {
+		updateMetric(w, r)
+	})
 
 	// Expose the custom registry metrics via HTTP
 	http.Handle("/metrics", promhttp.HandlerFor(customRegistry, promhttp.HandlerOpts{}))
@@ -75,6 +77,9 @@ func updateMetric(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Missing 'organization', 'repository', or 'metric' field", http.StatusBadRequest)
 		return
 	}
+	// Log the content of the request body
+	log.Printf("Received POST request: %+v\n", data)
+
 	// Choose the appropriate metric to update based on the "metric" field in the request
 	var metricToUpdate *prometheus.GaugeVec
 	switch data.Metric {
@@ -89,4 +94,8 @@ func updateMetric(w http.ResponseWriter, r *http.Request) {
 	metricToUpdate.WithLabelValues(data.Organization, data.Repository).Set(data.Number)
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Metric updated"))
+
+	// Log the request and the updated metric
+	log.Printf("Updated metric: %s, Organization: %s, Repository: %s, Number: %f\n",
+		data.Metric, data.Organization, data.Repository, data.Number)
 }
