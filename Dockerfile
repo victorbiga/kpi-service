@@ -19,15 +19,23 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 # Use a minimal base image for the final container
 FROM alpine:latest
 
-# Set the working directory inside the container
-WORKDIR /root/
+# Create a non-root user and group
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-# Copy the compiled binary from the builder stage
+# Set the working directory inside the container
+WORKDIR /home/appuser/
+
+# Copy the compiled binary from the builder stage and change ownership
 COPY --from=builder /app/app .
+
+# Change ownership of the directory to the non-root user
+RUN chown -R appuser:appgroup /home/appuser/
+
+# Switch to the non-root user
+USER appuser
 
 # Expose port 8080
 EXPOSE 8080
 
 # Command to run the executable
 CMD ["./app"]
-
