@@ -30,6 +30,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          attests: type=sbom
+          provenance: true
           platforms: linux/amd64
           push: true
           tags: victorbiga/kpi-service:latest
