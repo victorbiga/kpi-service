@@ -3,6 +3,7 @@ FROM golang:latest AS builder
 # random comment
 # Set the working directory inside the container
 WORKDIR /app
+COPY go.mod go.sum ./
 
 # Copy the Go modules manifests
 COPY go.mod go.sum ./
