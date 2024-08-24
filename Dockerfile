@@ -1,7 +1,6 @@
 # Use the official golang image as base
 FROM golang:latest AS builder
-
-# Set the working directory inside the container
+# Set the Current Working Directory inside the container
 WORKDIR /app
 
 # Copy the Go modules manifests
