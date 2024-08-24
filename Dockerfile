@@ -1,6 +1,6 @@
 # Use the official golang image as base
 FROM golang:latest AS builder
-
+# random comment
 # Set the working directory inside the container
 WORKDIR /app
 
