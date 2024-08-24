@@ -21,9 +21,23 @@ jobs:
       pull-requests: write
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
-
+        
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+       - uses: di-sukharev/opencommit@github-action-v1.0.4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          # set openAI api key in repo actions secrets,
+          # for openAI keys go to: https://platform.openai.com/account/api-keys
+          # for repo secret go to: <your_repo_url>/settings/secrets/actions
+          OCO_OPENAI_API_KEY: ${{ secrets.OCO_OPENAI_API_KEY }}
+          
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
