@@ -35,15 +35,3 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: victorbiga/kpi-service:latest
-
-      - name: Docker Scout
-        id: docker-scout
-        uses: docker/scout-action@v1
-        with:
-          command: cves,recommendations
-          to-latest: true
-          ignore-base: true
-          ignore-unchanged: true
-          only-fixed: true
-          write-comment: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
