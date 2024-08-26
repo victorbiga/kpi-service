@@ -1,1 +1,17 @@
 # values for new helm chart
+dashboard:
+  enabled: true
+  image:
+    repository: "grafana/grafana"
+    tag: "7.3.6"
+    pullPolicy: "IfNotPresent"
+  service:
+    type: "ClusterIP"
+    port: 3000
+    targetPort: 3000
+    annotations: {}
+    labels: {}
+  ingress:
+    enabled: false
+    annotations: {}
+    labels: {}
