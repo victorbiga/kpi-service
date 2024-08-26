@@ -15,7 +15,7 @@ if oco; then
     # Check the exit status of the gh pr view command and the PR state
     if [[ $exit_status -eq 0 && "$pr_state" == "OPEN" ]]; then
         # If the exit status is 0 and the PR state is OPEN, run the following command
-        echo "Pull request is not open, or an error occurred. No action taken."
+        echo "Pull request is already open. No action taken."
     else
         # If the exit status is not 0 or the PR state is not OPEN, do nothing
         echo "opening browser to create PR..."
