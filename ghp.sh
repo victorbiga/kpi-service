@@ -1,6 +1,5 @@
 #/bin/bash
 
-
 # Run the eco CLI tool and check if it succeeds
 if oco; then
     echo "oco command succeeded, proceeding with GitHub checks..."
