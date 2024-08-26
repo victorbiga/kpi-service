@@ -36,7 +36,7 @@ RUN chown -R appuser:appgroup /home/appuser/
 USER appuser
 
 # Expose port 8080
-EXPOSE 8080
+EXPOSE 8088
 
 # Command to run the executable
 CMD ["./app"]
