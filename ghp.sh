@@ -6,7 +6,7 @@ if oco; then
     echo "Eco command succeeded, proceeding with GitHub checks..."
 
     # Capture the PR state using gh CLI
-    pr_state=$(gh pr view --json state --jq '.state' 2>/dev/null)
+    pr_state=$(gh pr view --json state --jq '.state')
     exit_status=$?
 
     # Debugging output
