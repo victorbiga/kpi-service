@@ -44,7 +44,7 @@ jobs:
           file: ./Dockerfile
           attests: type=sbom
           provenance: true
-          platforms: linux/arm64
+          platforms: linux/amd64, linux/arm64
           push: false
           tags: victorbiga/kpi-service:latest
 
