@@ -10,7 +10,7 @@ concurrency:
   
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: arc-runner-kpi-service
 
     steps:
       - name: Checkout repository
