@@ -42,10 +42,11 @@ jobs:
           docker buildx ls 
           echo bla
           docker buildx create --use --name multi-arch-builder
-          echo bla
+          echo bla && sleep 5
           docker buildx ls 
-          
-          && exit 1
+          echo bla && sleep 5
+          docker buildx ls 
+   
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
