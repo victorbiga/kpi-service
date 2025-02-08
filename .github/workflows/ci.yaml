@@ -37,6 +37,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: debug
+        run: docker buildx ls && exit 1
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
