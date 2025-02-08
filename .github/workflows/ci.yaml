@@ -38,7 +38,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: debug
-        run: docker buildx ls && exit 1
+        run: |
+          docker buildx ls 
+          echo bla
+          docker buildx create --use --name multi-arch-builder
+          echo bla
+          docker buildx ls 
+          
+          && exit 1
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
